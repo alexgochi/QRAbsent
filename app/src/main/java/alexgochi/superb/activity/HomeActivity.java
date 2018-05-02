@@ -25,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import alexgochi.superb.R;
+import alexgochi.superb.app.AppConfig;
 
 public class HomeActivity extends AppCompatActivity {
     EditText inputSearch;
@@ -88,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... voids) {
                 try {
-                    URL url = new URL("http://172.16.112.125/Android/getData.php");
+                    URL url = new URL("http://192.168.1.7/Android/getData.php");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));

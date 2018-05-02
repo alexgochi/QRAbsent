@@ -9,6 +9,14 @@
     android:padding="10dp"
     tools:context=".activity.LoginActivity">
 
+    <ImageView
+        android:layout_width="@dimen/logo_w_h"
+        android:layout_height="@dimen/logo_w_h"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/qrabsent"
+        android:contentDescription="@string/login" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -14,11 +16,6 @@ import alexgochi.superb.helper.SQLiteHandler;
 import alexgochi.superb.helper.SessionManager;
 
 public class MainActivity extends Activity {
-
-    private TextView txtName;
-    private TextView txtEmail;
-    private Button btnLogout;
-
     private SQLiteHandler db;
     private SessionManager session;
 
@@ -27,9 +24,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
+        TextView txtName = (TextView) findViewById(R.id.name);
+//        TextView txtEmail = (TextView) findViewById(R.id.email);
+        ImageView btnLogout = (ImageView) findViewById(R.id.btnLogout);
+        ImageView btnAccount = (ImageView) findViewById(R.id.btnAccount);
+        ImageView btnSeminar = (ImageView) findViewById(R.id.btnSeminar);
+        ImageView btnAbout = (ImageView) findViewById(R.id.btnAbout);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -45,11 +45,11 @@ public class MainActivity extends Activity {
         HashMap<String, String> user = db.getUserDetails();
 
         String name = user.get("name");
-        String email = user.get("email");
+//        String email = user.get("email");
 
         // Displaying the user details on the screen
         txtName.setText(name);
-        txtEmail.setText(email);
+//        txtEmail.setText(email);
 
         // Logout button click event
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +57,27 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 logoutUser();
+            }
+        });
+
+        btnAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Account Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSeminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Seminar Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "About Clicked", Toast.LENGTH_SHORT).show();
             }
         });
     }
