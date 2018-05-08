@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -25,24 +26,29 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import alexgochi.superb.R;
 import alexgochi.superb.app.AppConfig;
+import alexgochi.superb.helper.SQLiteHandler;
 
 public class SeminarActivity extends AppCompatActivity {
-
-    InputStream inputStream = null;
-    String result = null;
-    String dataSeminar = null;
-    String[] seminar;
-    Spinner spinnerSeminar;
+    private InputStream inputStream = null;
+    private String result = null;
+    private Spinner spinnerSeminar;
     List<String> listSeminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seminar);
+
+        TextView txtName = (TextView) findViewById(R.id.name);
+        SQLiteHandler db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        String name = user.get("name");
+        txtName.setText(name);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -65,6 +71,7 @@ public class SeminarActivity extends AppCompatActivity {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"),8);
             StringBuilder stringBuilder = new StringBuilder();
+            String dataSeminar;
             while ((dataSeminar = reader.readLine()) != null) {
                 stringBuilder.append(dataSeminar).append("\n");
             }
@@ -79,7 +86,7 @@ public class SeminarActivity extends AppCompatActivity {
             JSONArray jsonArray = new JSONArray(result);
             JSONObject jsonObject;
 
-            seminar = new String[jsonArray.length()];
+            String[] seminar = new String[jsonArray.length()];
             for (int i = 0; i < jsonArray.length() ; i++) {
                 jsonObject = jsonArray.getJSONObject(i);
                 seminar[i] = jsonObject.getString("seminar");
@@ -95,15 +102,17 @@ public class SeminarActivity extends AppCompatActivity {
     }
 
     private void spinner_fn() {
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SeminarActivity.this,
+//               R.layout.support_simple_spinner_dropdown_item, listSeminar);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SeminarActivity.this,
-                android.R.layout.simple_spinner_item, seminar);
+                R.layout.spinner_layout, listSeminar);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinnerSeminar.setAdapter(arrayAdapter);
-        spinnerSeminar.setSelection(0);
         spinnerSeminar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItemText = (String) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        "Selected : " + listSeminar.get(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override

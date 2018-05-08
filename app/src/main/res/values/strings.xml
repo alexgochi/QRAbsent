@@ -20,4 +20,8 @@
     <string name="about_us">About Us</string>
     <string name="seminar_show">Seminar :</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="select_seminar">Seminar :</string>
+    <string name="username">Name :</string>
+    <string name="description">Description :</string>
+    <string name="generate">Generate QR Code</string>
 </resources>
