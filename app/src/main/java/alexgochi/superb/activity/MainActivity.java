@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView txtName = (TextView) findViewById(R.id.name);
-        TextView txtEmail = (TextView) findViewById(R.id.email);
         ImageView btnLogout = (ImageView) findViewById(R.id.btnLogout);
         ImageView btnAccount = (ImageView) findViewById(R.id.btnAccount);
         ImageView btnSeminar = (ImageView) findViewById(R.id.btnSeminar);
@@ -46,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
 
         String name = user.get("name");
-        String email = user.get("email");
 
         // Displaying the user details on the screen
         txtName.setText(name);
-        txtEmail.setText(email);
 
         // Logout button click event
         btnLogout.setOnClickListener(new View.OnClickListener() {
