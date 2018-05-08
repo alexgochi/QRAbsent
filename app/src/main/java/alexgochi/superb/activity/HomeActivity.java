@@ -36,8 +36,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         addSeminar = (ListView) findViewById(R.id.add_seminar);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
@@ -89,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... voids) {
                 try {
-                    URL url = new URL("http://192.168.1.7/Android/getData.php");
+                    URL url = new URL(AppConfig.URL_SEMINAR);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -126,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //if user pressed "yes", then he is allowed to exit from application
+                //if user pressed "yes", then he inputStream allowed to exit from application
                 finish();
             }
         });
@@ -143,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it inputStream present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }

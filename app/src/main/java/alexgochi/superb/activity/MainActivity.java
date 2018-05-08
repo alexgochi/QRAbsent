@@ -1,10 +1,11 @@
 package alexgochi.superb.activity;
 
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import alexgochi.superb.R;
 import alexgochi.superb.helper.SQLiteHandler;
 import alexgochi.superb.helper.SessionManager;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private SessionManager session;
 
@@ -25,7 +26,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         TextView txtName = (TextView) findViewById(R.id.name);
-//        TextView txtEmail = (TextView) findViewById(R.id.email);
+        TextView txtEmail = (TextView) findViewById(R.id.email);
         ImageView btnLogout = (ImageView) findViewById(R.id.btnLogout);
         ImageView btnAccount = (ImageView) findViewById(R.id.btnAccount);
         ImageView btnSeminar = (ImageView) findViewById(R.id.btnSeminar);
@@ -45,11 +46,11 @@ public class MainActivity extends Activity {
         HashMap<String, String> user = db.getUserDetails();
 
         String name = user.get("name");
-//        String email = user.get("email");
+        String email = user.get("email");
 
         // Displaying the user details on the screen
         txtName.setText(name);
-//        txtEmail.setText(email);
+        txtEmail.setText(email);
 
         // Logout button click event
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -70,14 +71,16 @@ public class MainActivity extends Activity {
         btnSeminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Seminar Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SeminarActivity.class);
+                startActivity(intent);
             }
         });
 
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "About Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -95,5 +98,28 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to exit?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //if user pressed "yes", then he is allowed to exit from application
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //if user select "No", just cancel this dialog and continue with app
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

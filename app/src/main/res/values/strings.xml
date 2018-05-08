@@ -18,4 +18,6 @@
     <string name="account">Account</string>
     <string name="seminar">Seminar</string>
     <string name="about_us">About Us</string>
+    <string name="seminar_show">Seminar :</string>
+    <string name="title_activity_about">AboutActivity</string>
 </resources>
