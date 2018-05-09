@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -70,11 +69,6 @@ public class QRActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
-    }
-
     public static Bitmap viewToBitmap(View view, int width, int height) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -109,7 +103,7 @@ public class QRActivity extends AppCompatActivity {
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String date = simpleDateFormat.format(new Date());
-        String name = "QRCode " + date + ".png";
+        String name = "QRAbsent " + date + ".png";
         String file_name = file.getAbsolutePath() + "/" + name;
         File new_file = new File(file_name);
         try {
@@ -136,7 +130,7 @@ public class QRActivity extends AppCompatActivity {
 
     private File getDisc() {
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        return new File(file, "Code");
+        return new File(file, "QRCode");
     }
 
     public void shareImage(View view) {
@@ -145,7 +139,7 @@ public class QRActivity extends AppCompatActivity {
         shareIntent.setType("image/png");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "Code.png");
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "QRCode.png");
         try {
             file.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(file);
