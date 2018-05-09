@@ -26,4 +26,6 @@
     <string name="generate">Generate QR Code</string>
     <string name="barcode">QR Code</string>
     <string name="next">Next</string>
+    <string name="about">About Us</string>
+    <string name="back_to_home">Back To Home</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -130,5 +131,10 @@ public class SeminarActivity extends AppCompatActivity {
         intent.putExtra("KEY_NAME", txtName.getText().toString());
         intent.putExtra("KEY_SEMINAR", spinnerSeminar.getSelectedItem().toString());
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
     }
 }
