@@ -1,5 +1,7 @@
 package alexgochi.superb.activity;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteCursor;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,8 @@ import alexgochi.superb.app.AppConfig;
 import alexgochi.superb.helper.SQLiteHandler;
 
 public class SeminarActivity extends AppCompatActivity {
+    TextView txtName;
+    String txtSeminar;
     private InputStream inputStream = null;
     private String result = null;
     private Spinner spinnerSeminar;
@@ -44,7 +49,7 @@ public class SeminarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seminar);
 
-        TextView txtName = (TextView) findViewById(R.id.name);
+        txtName = (TextView) findViewById(R.id.name);
         SQLiteHandler db = new SQLiteHandler(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
         String name = user.get("name");
@@ -98,12 +103,9 @@ public class SeminarActivity extends AppCompatActivity {
         } catch (JSONException e) {
             Log.e("Fail 1", e.toString());
         }
-
     }
 
     private void spinner_fn() {
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SeminarActivity.this,
-//               R.layout.support_simple_spinner_dropdown_item, listSeminar);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SeminarActivity.this,
                 R.layout.spinner_layout, listSeminar);
         arrayAdapter.setDropDownViewResource(R.layout.spinner_layout);
@@ -111,8 +113,9 @@ public class SeminarActivity extends AppCompatActivity {
         spinnerSeminar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "Selected : " + listSeminar.get(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Selected : " + listSeminar.get(position), Toast.LENGTH_SHORT).show();
+                txtSeminar = spinnerSeminar.getSelectedItem().toString();
+//                System.out.println("Item Selected : " + txtSeminar);
             }
 
             @Override
@@ -120,5 +123,12 @@ public class SeminarActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void passData(View view) {
+        Intent intent = new Intent(SeminarActivity.this, QRActivity.class);
+        intent.putExtra("KEY_NAME", txtName.getText().toString());
+        intent.putExtra("KEY_SEMINAR", spinnerSeminar.getSelectedItem().toString());
+        startActivity(intent);
     }
 }

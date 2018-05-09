@@ -2,6 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="alexgochi.qrabsent.HomeActivity">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search_seminar"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/action_login"
         android:title="@string/action_login"

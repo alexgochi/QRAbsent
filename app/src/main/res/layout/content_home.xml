@@ -13,14 +13,6 @@
     tools:context=".activity.HomeActivity"
     tools:showIn="@layout/activity_home">
 
-    <!-- Editext for Search -->
-    <EditText
-        android:id="@+id/inputSearch"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/search_seminar"
-        android:inputType="textVisiblePassword" />
-
     <ListView
         android:id="@+id/add_seminar"
         android:layout_width="match_parent"

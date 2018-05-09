@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //if user pressed "yes", then he is allowed to exit from application
-                finish();
+                finishAffinity();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

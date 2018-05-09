@@ -24,4 +24,6 @@
     <string name="username">Name :</string>
     <string name="description">Description :</string>
     <string name="generate">Generate QR Code</string>
+    <string name="barcode">QR Code</string>
+    <string name="next">Next</string>
 </resources>
