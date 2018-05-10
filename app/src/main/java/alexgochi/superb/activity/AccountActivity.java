@@ -53,6 +53,11 @@ public class AccountActivity extends AppCompatActivity {
 
         username.setText(name);
         email_user.setText(email);
+
+        if (savedInstanceState != null) {
+            String save_phone = savedInstanceState.getString("PHONE_NUMBER");
+            phone_user.setText(String.valueOf(save_phone));
+        }
     }
 
     @Override
@@ -71,14 +76,6 @@ public class AccountActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        String save_phone = savedInstanceState.getString("PHONE_NUMBER");
-        phone_user.setText(String.valueOf(save_phone));
-    }
-
     public void add_phone(View view) {
         LayoutInflater inflater = AccountActivity.this.getLayoutInflater();
         final View dialogLayout = inflater.inflate(R.layout.add_phone, null);
@@ -90,7 +87,7 @@ public class AccountActivity extends AppCompatActivity {
                         mPhone = dialogLayout.findViewById(R.id.note);
                         if (mPhone.getText().toString().equals("")) {
                             showToast();
-                        } else if (mPhone.getText().toString().length() < 12) {
+                        } else if (mPhone.getText().toString().length() < 12 || mPhone.getText().toString().length() > 12) {
                             showAlert();
                         } else {
                             mPhoneSet = mPhone.getText().toString();
@@ -111,5 +108,11 @@ public class AccountActivity extends AppCompatActivity {
     private void showToast() {
         Toast toast = Toast.makeText(getApplicationContext(), "Phone Cannot Empty", Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AccountActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

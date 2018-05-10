@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -150,6 +151,11 @@ public class QRActivity extends AppCompatActivity {
         }
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/Code.png"));
         startActivity(Intent.createChooser(shareIntent, "Share Image"));
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
     }
 
     public void backToHome(View view) {
