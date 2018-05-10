@@ -28,4 +28,10 @@
     <string name="next">Next</string>
     <string name="about">About Us</string>
     <string name="back_to_home">Back To Home</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="profile">Profile</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="history">History</string>
+    <string name="add_phone">Phone Number</string>
 </resources>

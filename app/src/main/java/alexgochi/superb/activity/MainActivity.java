@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Account Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+                startActivity(intent);
             }
         });
 

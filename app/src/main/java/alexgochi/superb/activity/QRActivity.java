@@ -1,5 +1,6 @@
 package alexgochi.superb.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,7 +34,6 @@ import alexgochi.superb.R;
 public class QRActivity extends AppCompatActivity {
     Button btnGenerate, btnHome;
     ImageView imageCode;
-    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class QRActivity extends AppCompatActivity {
     }
 
     public void downloadImage(View view) {
-        dialog = new AlertDialog.Builder(QRActivity.this).create();
+        AlertDialog dialog = new AlertDialog.Builder(QRActivity.this).create();
         dialog.setTitle("QR-Code");
         dialog.setMessage("Save QR-Code to Gallery ?");
         dialog.setButton("Yes", new DialogInterface.OnClickListener() {
@@ -101,7 +101,7 @@ public class QRActivity extends AppCompatActivity {
         if (!file.exists() && !file.mkdirs()) {
             Toast.makeText(getApplicationContext(), "Can't create directory to save Image.", Toast.LENGTH_SHORT).show();
         }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String date = simpleDateFormat.format(new Date());
         String name = "QRAbsent " + date + ".png";
         String file_name = file.getAbsolutePath() + "/" + name;
@@ -133,6 +133,7 @@ public class QRActivity extends AppCompatActivity {
         return new File(file, "QRCode");
     }
 
+    @SuppressLint("SdCardPath")
     public void shareImage(View view) {
         Bitmap bitmap = viewToBitmap(imageCode, imageCode.getWidth(), imageCode.getHeight());
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
