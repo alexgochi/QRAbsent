@@ -1,7 +1,6 @@
 package alexgochi.superb.activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteCursor;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +58,10 @@ public class SeminarActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         spinnerSeminar = (Spinner) findViewById(R.id.add_seminar);
+        spinner_seminar();
+    }
 
+    private void spinner_seminar() {
         try {
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(AppConfig.URL_GET_SEMINAR);
@@ -114,9 +115,7 @@ public class SeminarActivity extends AppCompatActivity {
         spinnerSeminar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(),"Selected : " + listSeminar.get(position), Toast.LENGTH_SHORT).show();
                 txtSeminar = spinnerSeminar.getSelectedItem().toString();
-//                System.out.println("Item Selected : " + txtSeminar);
             }
 
             @Override
