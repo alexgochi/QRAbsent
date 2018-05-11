@@ -134,7 +134,6 @@ public class QRActivity extends AppCompatActivity {
         return new File(file, "QRCode");
     }
 
-    @SuppressLint("SdCardPath")
     public void shareImage(View view) {
         Bitmap bitmap = viewToBitmap(imageCode, imageCode.getWidth(), imageCode.getHeight());
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
