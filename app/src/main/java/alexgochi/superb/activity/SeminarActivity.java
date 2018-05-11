@@ -96,7 +96,7 @@ public class SeminarActivity extends AppCompatActivity {
             String[] seminar = new String[jsonArray.length()];
             for (int i = 0; i < jsonArray.length() ; i++) {
                 jsonObject = jsonArray.getJSONObject(i);
-                seminar[i] = jsonObject.getString("seminar");
+                seminar[i] = jsonObject.getString("name");
             }
 
             listSeminar = new ArrayList<>(Arrays.asList(seminar));

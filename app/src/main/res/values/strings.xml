@@ -34,4 +34,6 @@
     <string name="email">Email</string>
     <string name="history">History</string>
     <string name="add_phone">Phone Number</string>
+    <string name="qrcode">QR Code</string>
+    <string name="title_activity_show_seminar">ShowSeminarActivity</string>
 </resources>

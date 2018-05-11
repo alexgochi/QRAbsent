@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
         String[] seminar = new String[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            seminar[i] = obj.getString("seminar");
+            seminar[i] = obj.getString("name");
         }
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, seminar);
         addSeminar.setAdapter(arrayAdapter);
