@@ -69,32 +69,6 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/titleDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/description"
-                android:textColor="@color/input_login"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@id/titleDesc" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

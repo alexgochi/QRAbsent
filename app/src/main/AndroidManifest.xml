@@ -70,8 +70,12 @@
         </activity>
         <activity
             android:name=".activity.ShowSeminarActivity"
-            android:label="@string/title_activity_show_seminar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/descSeminar"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

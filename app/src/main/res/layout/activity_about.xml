@@ -39,10 +39,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="144dp"
             android:gravity="center"
-            android:text="Scanner for your Seminar, makes it possible to minimize failed manual logging systems, and absent daycare."
+            android:text="QR for Seminar, makes it possible to minimize failed manual logging systems, and absent daycare."
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>

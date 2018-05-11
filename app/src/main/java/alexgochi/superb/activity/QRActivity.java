@@ -131,7 +131,7 @@ public class QRActivity extends AppCompatActivity {
 
     private File getDisc() {
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        return new File(file, "QRCode");
+        return new File(file, "Code");
     }
 
     public void shareImage(View view) {
@@ -140,7 +140,7 @@ public class QRActivity extends AppCompatActivity {
         shareIntent.setType("image/png");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "QRCode.png");
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "Code.png");
         try {
             file.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(file);
