@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ import java.util.Objects;
 import alexgochi.superb.R;
 
 public class QRActivity extends AppCompatActivity {
+    CardView saveQR, shareQR;
     Button btnGenerate, btnHome;
     ImageView imageCode;
 
@@ -47,6 +49,12 @@ public class QRActivity extends AppCompatActivity {
         imageCode = (ImageView) findViewById(R.id.qrViewOutput);
         btnHome = (Button) findViewById(R.id.btnHome);
         btnHome.setVisibility(View.INVISIBLE);
+
+        saveQR = (CardView) findViewById(R.id.saveQR_cv);
+        saveQR.setVisibility(View.INVISIBLE);
+
+        shareQR = (CardView) findViewById(R.id.shareQR_cv);
+        shareQR.setVisibility(View.INVISIBLE);
 
         btnGenerate = (Button) findViewById(R.id.btnGenerate);
         btnGenerate.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +78,8 @@ public class QRActivity extends AppCompatActivity {
 
                 btnGenerate.setVisibility(View.GONE);
                 btnHome.setVisibility(View.VISIBLE);
+                saveQR.setVisibility(View.VISIBLE);
+                shareQR.setVisibility(View.VISIBLE);
             }
         });
     }
