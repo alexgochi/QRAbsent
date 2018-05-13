@@ -1,5 +1,6 @@
 package alexgochi.superb.activity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -78,7 +79,7 @@ public class AccountActivity extends AppCompatActivity {
 
     public void add_phone(View view) {
         LayoutInflater inflater = AccountActivity.this.getLayoutInflater();
-        final View dialogLayout = inflater.inflate(R.layout.add_phone, null);
+        @SuppressLint("InflateParams") final View dialogLayout = inflater.inflate(R.layout.add_phone, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {

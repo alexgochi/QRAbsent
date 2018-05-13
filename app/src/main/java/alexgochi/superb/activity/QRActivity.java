@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -29,6 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import alexgochi.superb.R;
 
@@ -47,12 +50,13 @@ public class QRActivity extends AppCompatActivity {
 
         btnGenerate = (Button) findViewById(R.id.btnGenerate);
         btnGenerate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
                 try {
                     BitMatrix bitMatrix = multiFormatWriter.encode(
-                            getIntent().getExtras().getString("KEY_NAME") + "\n"
+                            Objects.requireNonNull(getIntent().getExtras()).getString("KEY_NAME") + "\n"
                                     + getIntent().getExtras().getString("KEY_SEMINAR"),
                             BarcodeFormat.QR_CODE, 300, 300);
 
@@ -102,7 +106,7 @@ public class QRActivity extends AppCompatActivity {
         if (!file.exists() && !file.mkdirs()) {
             Toast.makeText(getApplicationContext(), "Can't create directory to save Image.", Toast.LENGTH_SHORT).show();
         }
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss");
         String date = simpleDateFormat.format(new Date());
         String name = "QRAbsent " + date + ".png";
         String file_name = file.getAbsolutePath() + "/" + name;
@@ -131,16 +135,17 @@ public class QRActivity extends AppCompatActivity {
 
     private File getDisc() {
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        return new File(file, "Code");
+        return new File(file, "QRCode");
     }
 
+    @SuppressLint("SdCardPath")
     public void shareImage(View view) {
         Bitmap bitmap = viewToBitmap(imageCode, imageCode.getWidth(), imageCode.getHeight());
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/png");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "Code.png");
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "QRCode.png");
         try {
             file.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(file);
